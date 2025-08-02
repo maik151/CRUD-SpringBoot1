@@ -4,6 +4,8 @@ import com.proyecto1.crud.dto.ProductoDto;
 import com.proyecto1.crud.interfaz.IproductoNew;
 import com.proyecto1.crud.dao.ProductoDao;
 import org.springframework.stereotype.Service;
+
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,9 +14,21 @@ public class ImpProducto implements IproductoNew {
 
     private final ProductoDao productoDao;
 
-    public ImpProducto() {
-        this.productoDao = new ProductoDao();
+    public ImpProducto(ProductoDao productoDao) {
+        this.productoDao = productoDao;
     }
+
+    @Override
+    public List<ProductoDto> obtenerTodosMySql(){
+        try {
+            return productoDao.obtenerTodosMySql();
+        } catch (SQLException e) {
+            // Manejo de excepciones
+            e.printStackTrace();
+            return List.of();
+        }
+    }
+
 
     @Override
     public List<ProductoDto> obtenerTodosservice() {

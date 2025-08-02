@@ -17,6 +17,11 @@ public class ProductoDto {
         this.peso = peso;
     }
 
+    //Contructor sin parametros
+    public ProductoDto() {
+    }
+
+
     
     
     public int getId() {

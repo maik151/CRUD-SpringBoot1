@@ -60,4 +60,12 @@ public class ProductoController {
             return ResponseEntity.notFound().build();
         }
     }
+
+
+    // Obtener todos los productos desde SQL
+    @GetMapping("/mysql")
+    public ResponseEntity<List<ProductoDto>> obtenerTodosMySql() {
+        List<ProductoDto> productos = service.obtenerTodosMySql();
+        return ResponseEntity.ok(productos);
+    }
 }

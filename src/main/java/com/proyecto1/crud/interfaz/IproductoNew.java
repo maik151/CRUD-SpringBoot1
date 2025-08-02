@@ -10,4 +10,6 @@ public interface IproductoNew {
     Optional<ProductoDto> obtenerPorIdservice(int id);
     Optional<ProductoDto> actualizarProductoService(int id, String nombre, String descripcion, String tipo, double precio, double peso);
     boolean eliminarProductoService(int id);
+
+    List<ProductoDto> obtenerTodosMySql();
 }
