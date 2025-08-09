@@ -98,15 +98,20 @@ public class ClientesDao {
 
                 int filasAfectadas = ps.executeUpdate();
 
-                conn.commit(); // Confirmar cambios si no hay error
-
-                return filasAfectadas > 0;
+                if (filasAfectadas >= 0) {
+                    conn.commit(); // Confirmar cambios
+                    return true;   // ✅ Se actualizó correctamente
+                } else {
+                    conn.rollback(); // No se modificó nada
+                    return false;    // ⚠ No hubo cambios
+                }
 
             } catch (SQLException ex) {
-                conn.rollback(); // Revertir cambios en caso de error
+                conn.rollback(); // Revertir cambios solo si hay error real
+                System.err.println("Error SQL: " + ex.getMessage());
                 throw ex;
             } finally {
-                conn.setAutoCommit(true); // Restaurar comportamiento por defecto
+                conn.setAutoCommit(true); // Restaurar modo por defecto
             }
         }
     }
@@ -172,6 +177,7 @@ public class ClientesDao {
                 throw ex;
             } finally {
                 conn.setAutoCommit(true);
+                conn.close(); // Cerrar conexión
             }
         }
     }

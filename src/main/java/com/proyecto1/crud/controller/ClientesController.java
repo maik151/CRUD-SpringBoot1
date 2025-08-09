@@ -54,9 +54,9 @@ public class ClientesController {
     }
 
     // Actualizar cliente
-    @PutMapping("/{id}")
-    public ResponseEntity<?> Put_ActualizarCliente(@PathVariable int id, @RequestBody ClientesDto clienteActualizado) {
-        clienteActualizado.setId(id);
+    @PutMapping
+    public ResponseEntity<?> Put_ActualizarCliente(@RequestBody ClientesDto clienteActualizado) {
+    
         boolean actualizado = service.actualizarCliente(clienteActualizado);
         if (actualizado) {
             return ResponseEntity.ok("Cliente actualizado correctamente");

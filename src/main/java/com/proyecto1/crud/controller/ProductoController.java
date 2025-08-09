@@ -43,9 +43,9 @@ public class ProductoController {
     }
 
     // Actualizar un producto existente
-    @PutMapping("/actualizar")
-    public ResponseEntity<ProductoDto> actualizarProducto(@RequestBody ProductoDto dto) {
-        Optional<ProductoDto> actualizado = service.actualizarProductoService(dto.getId(), dto.getNombre(), dto.getDescripcion(),dto.getTipo(), dto.getPrecio(), dto.getPeso());
+    @PutMapping("/actualizar/{id}")
+    public ResponseEntity<ProductoDto> actualizarProducto(@PathVariable int id, @RequestBody ProductoDto dto) {
+        Optional<ProductoDto> actualizado = service.actualizarProductoService(id, dto.getNombre(), dto.getDescripcion(),dto.getTipo(), dto.getPrecio(), dto.getPeso());
         return actualizado.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
